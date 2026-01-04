@@ -1,45 +1,63 @@
-# Tech interview smart contracts coding problem
+# ✅ Tech Interview Smart Contracts – Test Result & Submission
 
-This is a Solidity coding problem for tech interviews. It is designed to take **no more than a few hours**.
+## Overview
 
-## Getting setup
+This repository contains the completed solution for the **Tech Interview Smart Contracts Coding Problem**.
 
-Ensure you have installed:
+The task required implementing logic **only inside `Token.sol`**, ensuring all provided unit tests pass without modifying the test suite.
 
-- [Node.js](https://nodejs.org/) **v20+**
-- [Hardhat](https://hardhat.org/) (already included as a dev dependency)
+The implemented smart contract behaves as:
 
-## Instructions
+- A **mintable ERC-20–like token** backed 1:1 by ETH (similar to Wrapped ETH)
+- Supports **mint**, **burn**, **transfer**, and **allowance**
+- Maintains an **efficient on-chain token holder list**
+- Distributes **ETH dividends proportionally** to token holders
+- Preserves accrued dividends even after tokens are transferred or burned
 
-### 1. Setup
+---
 
-Clone the repo locally and install the NPM dependencies:
+## 🧠 Contract Design Highlights
 
-### 2. Task
+- `mint()` mints tokens equal to `msg.value`
+- `burn()` redeems ETH equal to token balance
+- Holder list updates automatically on mint, burn, and transfer
+- Dividend payouts compound correctly across multiple distributions
+- Withdrawals can be made at any time, even after relinquishing tokens
 
-**You only need to write code in the `Token.sol` file. Please ensure all the unit tests pass to successfully complete this part.**
+---
 
-The contracts consist of a mintable ERC-20 `Token` (which is similar to a _Wrapped ETH_ token). Callers mint tokens by depositing ETH. They can then burn their token balance to get the equivalent amount of deposited ETH back.
+## 🧪 Test Results
 
-In addition, token holders can receive dividend payments in ETH in proportion to their token balance relative to the total supply. Dividends are assigned by looping through the list of holders.
+All unit tests pass successfully using Hardhat.
 
-Dividend payments are assigned to token holders' addresses. This means that even if a token holder were to send their tokens to somebody else later on or burn their tokens, they would still be entitled to the dividends they accrued whilst they were holding the tokens. 
+```bash
+npm run test
 
-You will thus need to **efficiently** keep track of individual token holder addresses in order to assign dividend payouts to holders with minimal gas cost.
+Contract: Token
+✔ has default values
+✔ can be minted
+✔ can be burnt
+✔ can be transferred directly
+✔ can be transferred indirectly
+✔ disallows empty dividend
+✔ keeps track of holders when minting and burning
+✔ keeps track of holders when transferring
+✔ compounds the payouts
+✔ allows for withdrawals in-between payouts
+✔ allows for withdrawals even after holder relinquishes tokens
 
-For a clearer understanding of how the code is supposed to work please refer to the tests in the `test` folder.
+11 passing
+0 failing
 
-Your Solution must pass the test: `npm run test` - run the tests (Hardhat)
+## Loom Video Link:
+https://www.loom.com/share/3b0a801b258444c4b7301a3746a339e7
 
-![Test Result](./test-result.png)
+## Repository Access
 
-### 3: Submission
+Repository is public
 
-- Record a short [Loom video](https://www.loom.com) showing how it works, including the expected and actual behavior if you're testing.
-- Once you’ve completed the tasks, send the result to https://forms.gle/1E2z5713vGV9vhr4A.
-- Please make sure that your repository is **public** or share access if it's private.
+Only Token.sol was modified
 
-### 4. Deadline
-
-
-Please complete and submit the result within 1 ~ 2 hours since you accepted the invitation, unless otherwise discussed.
+Test files and project structure remain unchanged
+Link :
+https://github.com/jinal2349/sc-assessment
